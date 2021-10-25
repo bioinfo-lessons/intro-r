@@ -117,7 +117,7 @@ Write a script that:
 
 </details>
 
-## Exercise 6: the remainder of the division
+# Exercise 6: the remainder of the division
 
 Write a script that divides 1600 by 1250 and retrieves the remainder of the 
 operation. Then, check if the remainder is less than 30. Print the result.
@@ -133,7 +133,7 @@ operation. Then, check if the remainder is less than 30. Print the result.
 
 </details>
 
-## Exercise 7: Randomness madness
+# Exercise 7: Randomness madness
 
 We can use `runif()` to generate random numbers. For instance, to generate a
 random rational number between 1 and 20, we can type:
@@ -166,7 +166,7 @@ After that, divide second by third and multiply it by first. Store and print the
   ```
 </details>
 
-## Exercise 8: Order matters
+# Exercise 8: Order matters
 Define in  a script the following variables:
 
 ```R
