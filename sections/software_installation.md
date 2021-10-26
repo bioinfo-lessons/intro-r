@@ -63,7 +63,7 @@ Finally, launch RStudio with
 rstudio
 ```
 
-## Why are we launching Rstudio from miniconda3/lib
+## Why are we launching Rstudio from miniconda3/lib?
 
 You can launch RStudio from any directory, as long as you have an R installation in your active conda environment. However,you may find that RStudio fails to load
 certain libraries from time to time, even if they are successfully installed. By setting lib to the default local path, these issues go away.
