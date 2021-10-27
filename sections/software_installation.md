@@ -4,7 +4,7 @@ the directory where you want to clone the repo. It does not matter where, as lon
 have full permissions. If you are unsure, choose your home directory.
 
 ```bash
-git clone --branch master https://gitlab.com/bioinfo-lessons/
+git clone https://gitlab.com/bioinfo-lessons/
 ```
 
 # 2. Install R and the required packages for the course with conda
