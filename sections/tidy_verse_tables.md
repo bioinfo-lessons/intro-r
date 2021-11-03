@@ -32,6 +32,7 @@ of `read.csv()` and try to find the parameter to skip the header.
 
 <details>
   <summary>Answer</summary>
+  
 ```R
 messy <- read.csv('raw/raw_drugs.csv', skip=3)
 ```
@@ -44,6 +45,7 @@ package _readr_. This time, call the table **messy_readr**.
 
 <details>
   <summary>Answer</summary>
+  
 ```R
 messy_readr <- readr::read_csv('raw/raw_drugs.csv', skip=3)
 ```
@@ -59,6 +61,7 @@ can do this using ```class()```.
 
 <details>
   <summary>Answers</summary>
+  
 1. No. The first one is a data.frame and the second one (coming from readr) is a tibble.
 1. No. The second table reports the data type of each column.
 1. Yes. Using `as.data.frame()`.
@@ -93,6 +96,7 @@ Now, **answer the following questions**:
 
 <details>
   <summary>Answers</summary>
+  
 1. 5. 
 1. It means that the resulting table will be **longer**: i.e. it will have more rows and less columns than before.
 1. It is clearer and allows for much better subsetting. 
@@ -279,4 +283,3 @@ they are now factors.
 1. Then, after `mutate()`, we send the result again to another function, in this case, `group_by()`.
 1. `group_by()` simply groups the data frame by **drug_type** and sends the results to `summarise()`.
 1. `summarise()` creates a new data frame as in the previous exercise.
-
