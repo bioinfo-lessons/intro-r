@@ -1,0 +1,7 @@
+## name: patient name
+## drug_X_Y: type of drug (X) and day of the measures (Y)
+## Each value is the measured heart rate
+"name","drug_a_1","drug_a_2","drug_a_3","drug_b_1","drug_b_2","drug_b_3"
+"Sandra",63,74,77,56,90,98
+"Alfredo",78,56,89,90,89,100
+"Laura",64,66,50,50,102,100
