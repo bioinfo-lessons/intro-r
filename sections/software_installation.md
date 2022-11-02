@@ -42,7 +42,7 @@ You can download it [here].(https://www.rstudio.com/products/rstudio/download/)
 To launch RStudio from a suitable conda installation of R, open up a new terminal session and load your conda environment by typing:
 
 ```bash
-conda activate intro_y
+conda activate intro_r
 ```
 
 Now navigate to your  conda installation directory. By default conda is installed in 
