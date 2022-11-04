@@ -10,3 +10,4 @@ Tutorials and coding exercises for the course: Introducción a R
 1. [Hands-on III: Vectors and matrices](sections/vector_matrix.md)
 1. [Hands-on IV: Introduction to tidyverse](sections/tidy_verse_tables.md)
 1. [Hands-on V: A real world example of untidy data](sections/real_world_data.md)
+1. [Hands-on VI: Introduction to ggplot2](sections/ggplot2.md)
