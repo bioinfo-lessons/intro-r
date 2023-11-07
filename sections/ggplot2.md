@@ -2,163 +2,143 @@
 
 ## A florid example
 
-Let's start by loading the tidyverse library and iris dataset
+Let's start by loading the tidyverse library and the iris dataset.
 ```R
 library(tidyverse)
-```
-
-This is an empty initialization of ggplot. Loads the canvas, but it's empty.
-
-```R
 iris <- iris
-iris_sepal_lm <- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width))
 ```
-Actual plots are composed of GEOMETRIES (geoms). Here we are adding a dot geom,
-thus creating a scatter plot
+
+This is an **empty initialization of ggplot2**. It just loads the canvas.
+
 ```R
-iris_sepal_lm <- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-    geom_point()
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width))
 ```
-Our dataset is composed of different species of flowers. To id. which dot
-belongs to which flower, we'll be adding colors now.
+Actual plots are composed of **geometries** (`geom_`). Here we create a scatter 
+plot.
 ```R
-iris_sepal_lm <- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-    geom_point(aes(color = Species)) 
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_point()
+```
+Our dataset is composed of different species of flowers. To identify which dot
+belongs to which flower, we add colors.
+```R
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point() 
 ```
     
-We can even add a simple linear model to the mix, to see if there is a linear
-correlation between sepal length and width
+We can add a simple linear model to the mix, to see if there is a linear
+correlation between sepal length and width.
 ```R
-iris_sepal_lm <- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-    geom_point(aes(color = Species)) +
-    geom_smooth(aes(color = Species), method = "lm")
-```
-Since our COLOR aesthetic is the same for both the geom point and the geom
-smooth, we can add it to the ggplot call instead. Thus, both the geom 
-point and the geom smooth will inherit the aes
-```R
-iris_sepal_lm <- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
-    geom_point() +
-    geom_smooth(method = "lm")
-```
-Now we are going to create a boxplot using the same data.
-```R
-iris_sepals_box <- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-    geom_boxplot() 
-```
-Again, a mixed boxplot is not very useful. Let's split it by species
-```R
-iris_sepals_box <- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-    geom_boxplot(aes(color = Species)) 
-```
-Hmmm, the color aesthetic for boxplots only adds color for the outline of the geom,
-let's add FILL instead
-```R
-iris_sepals_box <- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-    geom_boxplot(aes(fill = Species)) 
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_point() +
+  geom_smooth(method = "lm")
 ```
 
-Let's change some labels now. First, the x axis and the y axis names. Let's add
-a title too. Also, we are changing the legend name
+Now we create a boxplot using the same data.
 ```R
-iris_sepals_box <- ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-    geom_boxplot(aes(fill = Species)) +
-    xlab(label = "Sepal length") + # X axis label
-    ylab(label = "Sepal width") + # Y axis label
-    scale_fill_discrete("Flower") + # Legend name
-    ggtitle(label = "This is a title", subtitle = "This is a subtitle")
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width)) +
+  geom_boxplot() 
+```
+
+A mixed boxplot is not very useful. Let's split it by species.
+```R
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+  geom_boxplot() 
+```
+Hmmm, the color aesthetic for boxplots only adds color for the outline of the 
+`geom_`, let's fill it instead.
+```R
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, fill = Species)) +
+  geom_boxplot() 
+```
+
+Let's change the x and y axis labels and add a title and a subtitle. Also, we 
+are changing the legend name.
+```R
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, fill = Species)) +
+  geom_boxplot() +
+  ggtitle(label = "This is a title", subtitle = "This is a subtitle") +
+  labs(x = "Sepal length", y = "Sepal width", fill = "Flower")
 ```    
 
-By default, ggplot2 "guesstimates" the coords. at which the X axis and the Y
-axis meet. But we can change it too so that our plot starts at (0,0)
+By default, ggplot2 "guesstimates" the axis limits. But we can force our plot 
+to start at (0,0).
 ```R
-iris_sepals_box <- ggplot(data = iris) +
-    scale_x_continuous(limits = c(0, 10), n.breaks = 10) +
-    scale_y_continuous(limits = c(0, 5), n.breaks = 10) +
-    geom_boxplot(aes(x = Sepal.Length, y = Sepal.Width, fill = Species)) +
-    xlab(label = "Sepal length") +
-    ylab(label = "Sepal width") +
-    scale_fill_discrete("Flower") +
-    ggtitle(label = "This is a title", subtitle = "This is a subtitle")
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, fill = Species)) +
+  geom_boxplot() +
+  scale_x_continuous(limits = c(0, 10), n.breaks = 10) +
+  scale_y_continuous(limits = c(0, 5), n.breaks = 10) +
+  ggtitle(label = "This is a title", subtitle = "This is a subtitle") +
+  labs(x = "Sepal length", y = "Sepal width", fill = "Flower")
 ```
 
-Let's keep the default origin instead of the previous one. Now, we are
-going to split the plot by facets.
+Let's keep the default origin and split the plot by facets.
 ```R
-iris_sepals_box <- ggplot(data = iris) +
-    geom_boxplot(aes(x = Sepal.Length, y = Sepal.Width, fill = Species)) +
-    facet_grid(cols = vars(Species)) +
-    xlab(label = "Sepal length") +
-    ylab(label = "Sepal width") +
-    scale_fill_discrete("Flower") +
-    ggtitle(label = "This is a title", subtitle = "This is a subtitle")
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, fill = Species)) +
+  geom_boxplot() +
+  ggtitle(label = "This is a title", subtitle = "This is a subtitle") +
+  labs(x = "Sepal length", y = "Sepal width", fill = "Flower") +
+  facet_grid(~Species)
 ```
 The default ggplot2 theme is really ugly. We'll add a prebuilt theme, called
-theme_bw
+`theme_bw`.
 ```R
-iris_sepals_box <- ggplot(data = iris) +
-    geom_boxplot(aes(x = Sepal.Length, y = Sepal.Width, fill = Species)) +
-    facet_grid(cols = vars(Species)) +
-    xlab(label = "Sepal length") +
-    ylab(label = "Sepal width") +
-    scale_fill_discrete("Flower") +
-    ggtitle(label = "This is a title", subtitle = "This is a subtitle") +
-    theme_bw()
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, fill = Species)) +
+  geom_boxplot() +
+  ggtitle(label = "This is a title", subtitle = "This is a subtitle") +
+  labs(x = "Sepal length", y = "Sepal width", fill = "Flower") +
+  facet_grid(~Species) +
+  theme_bw()
 ```
 
 We can overwrite some of the theme's settings like the grid lines and the font.
-In the following example, I'm removing both the major and the minor grid lines.
-I'm also changing the font and the fontsize.
+In the following example, we are removing both the major and the minor grid lines. We are also changing the font and the fontsize.
 ```R
-iris_sepals_box <- ggplot(data = iris) +
-    geom_boxplot(aes(x = Sepal.Length, y = Sepal.Width, fill = Species)) +
-    facet_grid(cols = vars(Species)) +
-    xlab(label = "Sepal length") +
-    ylab(label = "Sepal width") +
-    scale_fill_discrete("Flower") +
-    ggtitle(label = "This is a title", subtitle = "This is a subtitle") +
-    theme_bw() +
-    theme(
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, fill = Species)) +
+  geom_boxplot() +
+  ggtitle(label = "This is a title", subtitle = "This is a subtitle") +
+  labs(x = "Sepal length", y = "Sepal width", fill = "Flower") +
+  facet_grid(~Species) +
+  theme_bw() +
+  theme(
         panel.grid.major = element_blank(),
         panel.grid.minor = element_blank(),
-        text = element_text(size = 11, family = "Comic Sans MS") ## This here changes the font for all of the text labels
+        text = element_text(size = 11, family = "Comic Sans MS")
     )
 ```
 
-ggplot2 default palette is so-so. However, the RColorBrewer library extends
-the base color pal. allowing us to change the full color set.
+ggplot2 default palette is so-so. We are using an `RColorBrewer` palette 
+instead.
 ```R
-## RColorBrewr
 library(RColorBrewer)
-
-iris_sepals_box <- ggplot(data = iris) +
-    geom_boxplot(aes(x = Sepal.Length, y = Sepal.Width, fill = Species)) +
-    facet_grid(cols = vars(Species)) +
-    xlab(label = "Sepal length") +
-    ylab(label = "Sepal width") +
-    scale_fill_discrete("Flower") +
-    scale_fill_brewer("New flower", palette = "Accent") + ## This here allows us to change the col. palette
-    ggtitle(label = "This is a title", subtitle = "This is a subtitle") +
-    theme_bw() +
-    theme(
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, fill = Species)) +
+  geom_boxplot() +
+  scale_fill_brewer(palette = "Accent") +
+  ggtitle(label = "This is a title", subtitle = "This is a subtitle") +
+  labs(x = "Sepal length", y = "Sepal width", fill = "Flower") +
+  facet_grid(~Species) +
+  theme_bw() +
+  theme(
         panel.grid.major = element_blank(),
-        panel.grid.minor = element_blank()
+        panel.grid.minor = element_blank(),
+        text = element_text(size = 11, family = "Comic Sans MS")
     )
 ```
 
 ## Exercise 1: deadly inequality
-Load up the Titanic dataset, which is already installed in R. To do so, type
+Load up the Titanic dataset, which is already loaded into R. To do so, type
 
 ```R
 titanic <- as.data.frame(Titanic)
 ```
 
-1. Change the name of the column **Freq** to cases or create a new column with that name.
-2. Draw a boxplot of the amount of cases (death) by:
+1. Change the name of the column **Freq** to cases or create a new column with 
+that name.
+2. Draw a boxplot of the amount of cases (deaths):
 
-a) By ticket class
-b) By Sex
-c) By Age
+a) By ticket class.
+b) By Sex.
+c) By Age.
 
 It must be a **single plot**. As a tip, try to play around with:
 
@@ -175,8 +155,9 @@ titanic <- as.data.frame(Titanic)
 titanic$cases <- titanic$Freq
 
 the_plot <- ggplot(data = titanic, aes(x = Age, y = cases, fill = Sex)) +
-    geom_boxplot() +
-    facet_wrap(vars(Class))
+  geom_boxplot() +
+  facet_wrap(~Class)
+the_plot
 
   ```
 </details>
